@@ -1,0 +1,170 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define SIZE 200
+
+typedef struct{
+    char nome[SIZE][30][150];
+    char vacinaOp[SIZE][30];
+}Vacina;
+
+char nome[SIZE][50];
+int codigo[SIZE];
+int idade[SIZE];
+Vacina vacinas1;
+int op, i,j;
+static int linha = 0;
+
+
+
+void cadastro();
+void pesquisa();
+void vacinas();
+
+int main (void){
+        cadastro();
+
+        return(0);
+}
+
+void cadastro(){
+
+    do{
+        printf("\nDigite o nome da pessoa:");
+        scanf("%[^\n]s", &nome[linha]);
+        printf("\nDigite a idade da pessoa:");
+        scanf("%d", &idade[linha]);
+        getchar();
+        printf("\nDigite um codigo para o cadastro:");
+        scanf("%d", &codigo[linha]);
+        getchar();
+        system("cls");
+        linha++;
+        op=0;
+        vacinas();
+    }while(op==1);
+    return;
+}
+void pesquisa(){
+    int codigoPesquisa;
+    char nomePesquisa[50];
+
+    do {
+    printf("\nDigite 1 para pesquisar:");
+    scanf("%d", &op);
+    getchar();
+    switch(op){
+     case 1:
+         printf("\nDigite o codigo: ");
+         scanf("%d", &codigoPesquisa);
+         getchar();
+            for(i=0;i<SIZE;i++){
+                if(codigo[i]==codigoPesquisa){
+                    printf("\nNome %s \nCodigo %d \nIdade %d", nome [i], codigo[i], idade[i]);
+                    printf("\nVacinas tomadas: ");
+                    for(j=0;j<8;j++){
+                        if(vacinas1.vacinaOp[i][j]=='s'){
+                            printf("\n%s",vacinas1.nome[i][j]);
+                        }
+                    }
+                    printf("\n\nVacinas nao tomadas: ");
+                    for(j=0;j<8;j++){
+                        if(vacinas1.vacinaOp[i][j]!='s'){
+                            printf("\n%s",vacinas1.nome[i][j]);
+                        }
+                    }
+                }
+            }
+        break;
+
+     default:
+        printf("\nOpcao invalida");
+        break;
+    }
+    printf("\n\n1-Continuar Pesquisando \n2-Cadastrar novamente\n3-Sair\n");
+    scanf("%d", &op);
+    if(op==2){
+        getchar();
+        system("cls");
+        cadastro();
+    }
+    else if(op==3){
+        exit(EXIT_SUCCESS);
+    }
+    getchar();
+}while(op==1);
+
+return;
+}
+void vacinas(){
+    printf("\nVamos atualizar a lista de vacinas que ja foram aplicadas:\n");
+    printf("\nDigite 's' para as vacinas tomadas e 'n' para as nao tomadas:\n");
+
+    printf("\n\nO individuo tomou as seguintes vacinas ao nascer\n-Vacina BCG\n-Vacina da Hepatite B:\n");
+    scanf("%c", &vacinas1.vacinaOp[linha-1][0]);
+    strcpy(vacinas1.nome[linha-1][0],"Vacinas ao Nascer");
+    getchar();
+
+    printf("\n\nO individuo tomou as seguintes vacinas com 2 meses\n-Vacina VOP 1 DOSE\nVacina VORH\n-Vacina Tetravalente 1 DOSE\n-Vacina Antipneumocócica 1 DOSE:\n");
+    scanf("%c", &vacinas1.vacinaOp[linha-1][1]);
+    strcpy(vacinas1.nome[linha-1][1],"Vacinas de 2 meses");
+    getchar();
+
+    printf("\n\nO individuo tomou as seguintes vacinas com 3 meses\n-Vacina Antimeningocócica C:\n");
+    scanf("%c", &vacinas1.vacinaOp[linha-1][2]);
+    strcpy(vacinas1.nome[linha-1][2],"Vacinas de 3 meses");
+    getchar();
+    system("cls");
+
+    printf("\n\nO individuo tomou as seguintes vacinas com 4 meses\n-Vacina VOP 2 DOSE\n-Vacina Tetravalente 2 DOSE\n-Vacina VORH 2 DOSE\n-Vacina Antipneumocócica 2 DOSE\n");
+    scanf("%c", &vacinas1.vacinaOp[linha-1][3]);
+    strcpy(vacinas1.nome[linha-1][3],"Vacinas de 4 meses");
+    getchar();
+
+    printf("\n\nO individuo tomou as seguintes vacinas com 6 meses\n-Vacina VOP 3 DOSE\n-Vacina Tetravalente 3 DOSE\n-Vacina Hepatite B 2 DOSE\n-Vacina Antipneumocócica 3 DOSE\n");
+    scanf("%c", &vacinas1.vacinaOp[linha-1][4]);
+    strcpy(vacinas1.nome[linha-1][4],"Vacinas de 6 meses");
+    getchar();
+
+    printf("\n\nO individuo tomou as seguintes vacinas com 12 meses\n-Vacina SRC 1 DOSE\n-Vacina Antipneumocócica Reforco\n");
+    scanf("%c", &vacinas1.vacinaOp[linha-1][5]);
+    strcpy(vacinas1.nome[linha-1][5],"Vacinas de 12 meses");
+    getchar();
+    system("cls");
+
+     printf("\n\nO individuo tomou as seguintes vacinas com 15 meses\n-Vacina DTP 1 Reforco \n-Vacina Antipneumocócica Reforco \n-Vacina VOP Reforco\n");
+    scanf("%c", &vacinas1.vacinaOp[linha-1][6]);
+    strcpy(vacinas1.nome[linha-1][6],"Vacinas de 15 meses");
+    getchar();
+
+    printf("\n\nO individuo tomou as seguintes vacinas com 4 Anos:\n-Vacina DTP 2 Reforco \n-Vacina SRC 1 DOSE\n");
+    scanf("%c", &vacinas1.vacinaOp[linha-1][7]);
+    strcpy(vacinas1.nome[linha-1][7],"Vacinas com 4 Anos");
+    getchar();
+
+    printf("\n\nO individuo tomou as seguintes vacinas com 10 Anos\n-Vacina Febre Amarela 1 DOSE(Reforco a cada 10 anos)\n");
+    scanf("%c", &vacinas1.vacinaOp[linha-1][8]);
+    strcpy(vacinas1.nome[linha-1][8],"Vacinas com 10 Anos");
+    getchar();
+
+    if(vacinas1.vacinaOp[linha-1][0]=='s' && vacinas1.vacinaOp[linha-1][1]=='s' && vacinas1.vacinaOp[linha-1][2]=='s' && vacinas1.vacinaOp[linha-1][3]=='s' && vacinas1.vacinaOp[linha-1][4]=='s' && vacinas1.vacinaOp[linha-1][5]=='s' && vacinas1.vacinaOp[linha-1][6]=='s' && vacinas1.vacinaOp[linha-1][7]=='s' && vacinas1.vacinaOp[linha-1][8]=='s'){
+        printf("\nVacinas ok");
+        getchar();
+
+    }else{
+        printf("\nVacinas em falta");
+        getchar();
+    }
+    printf("\nDigite 1 para continuar cadastrando ou outro terminar o cadastro:");
+    scanf("%d", &op);
+    if(op==1){
+        system("cls");
+        getchar();
+        cadastro();
+    }else{
+        system("cls");
+        pesquisa();
+    }
+
+return;
+}
